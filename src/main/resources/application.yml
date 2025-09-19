@@ -1,0 +1,23 @@
+spring:
+    application:
+        name: appblog
+    jpa:
+        hibernate:
+            ddl-auto: create
+        show-sql: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQLDialect
+                format_sql: true
+    
+    datasource:
+        url: jdbc:mysql://localhost:3306/blogDb
+        username: root
+        password: toor
+    logging:
+        level:
+            org.springframework.security: DEBUG
+            org.springframework.web: DEBUG
+            org.hibernate.SQL: DEBUG
+            org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+            com.example.demo: DEBUG
