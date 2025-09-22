@@ -35,7 +35,7 @@ public class PostsController {
     public List<Post> getPostByTitle(@PathVariable String title) {
         return postService.getPostByTitle(title);
     }
-    @DeleteMapping("/{id}")/
+    @DeleteMapping("/{id}")
     public String  deletePostById(@PathVariable Long id){
         postService.deletePost(id);
         return "post successfuly deleted";
