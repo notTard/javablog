@@ -2,14 +2,13 @@ package com.firstapp.blog.appblog.model;
 
 import java.util.Set;
 
-import jakarta.persistence.CollectionTable;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -23,11 +22,7 @@ public class User {
     @Column
     private String password;
 
-    @ElementCollection
-    @CollectionTable(
-        name="post",
-        joinColumns=@JoinColumn(name="id")
-        )
+    @OneToMany(mappedBy="author",cascade = CascadeType.ALL)
     @Column(name="posts")
     private Set<Post> posts;
     
