@@ -1,4 +1,5 @@
-Simple Blog application on Java 17 + Spring \n
-Technologies:
-Authentication : JSON Web Token
-Database : MySQL
+#Simple Blog application on Java 17 + Spring
+
+##Technologies
+>Authentication : JSON Web Token
+>Database : MySQL
