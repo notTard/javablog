@@ -9,6 +9,10 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
                 format_sql: true
+    security:
+        jwt:
+            secret: "your-super-secret-key-that-should-be-long-and-complex"
+            expiration: 3600000
     
     datasource:
         url: jdbc:mysql://localhost:3306/blogDb
