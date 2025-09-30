@@ -11,8 +11,8 @@ spring:
                 format_sql: true
     security:
         jwt:
-            secret: "your-super-secret-key-that-should-be-long-and-complex"
-            expiration: 3600000
+            secret: <your jwt secret>
+            expiration: <time>
     
     datasource:
         url: jdbc:mysql://localhost:3306/<dbname>
