@@ -5,6 +5,6 @@
 >
 >Database : MySQL
 
-#User Registration
+# User Registration
 
 <img src ="https://github.com/notTard/javablog/blob/main/proof/Screenshot_41.png" width="300" height="200" alt="Скрин регистрации")
