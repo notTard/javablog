@@ -7,4 +7,4 @@
 
 #User Registration
 
-!proof/screenshot_41.png
+![Скрин регистрации](https://github.com/notTard/javablog/blob/main/proof/Screenshot_41.png)
