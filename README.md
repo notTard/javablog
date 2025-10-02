@@ -4,3 +4,6 @@
 >Authentication : JSON Web Token
 >
 >Database : MySQL
+
+#User Registration
+(proof/screenshot_41.png)
