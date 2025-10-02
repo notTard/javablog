@@ -3,13 +3,11 @@ package com.firstapp.blog.appblog.jwt;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.firstapp.blog.appblog.UserDetails.UserDetailsImpl;
-import com.firstapp.blog.appblog.model.Post;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
