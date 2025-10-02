@@ -10,7 +10,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.firstapp.blog.appblog.service.UserService;
 
-import io.jsonwebtoken.io.IOException;
+import java.io.IOException;
+//import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,11 +52,11 @@ public class JwtFilter extends OncePerRequestFilter{
                         SecurityContextHolder.getContext().setAuthentication(auth);
                     }
                 }
-                filterChain.doFilter(request,response);
             }
         }catch(Exception e){
             System.out.println("Cant set user authentication in security context");
         }
+        filterChain.doFilter(request,response);
     }
     
 }

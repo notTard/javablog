@@ -2,6 +2,8 @@ package com.firstapp.blog.appblog.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +26,7 @@ public class User {
 
     @OneToMany(mappedBy="author",cascade = CascadeType.ALL)
     @Column(name="posts")
+    @JsonIgnore
     private Set<Post> posts;
     
 }

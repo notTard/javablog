@@ -2,12 +2,19 @@ package com.firstapp.blog.appblog.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.firstapp.blog.appblog.UserDetails.UserDetailsImpl;
+import com.firstapp.blog.appblog.controller.DTO.PostResponse;
 import com.firstapp.blog.appblog.model.Post;
+import com.firstapp.blog.appblog.model.User;
 import com.firstapp.blog.appblog.service.PostService;
+import com.firstapp.blog.appblog.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +29,34 @@ public class PostsController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
+
+    //private UserDetailsImpl userDetails;
+
     @GetMapping("/posts")
-    public List<Post> getAllPosts() {
-        return postService.findAllPosts();
+    public List<PostResponse> getAllPosts() {
+        return postService.findAllPosts().stream()
+            .map(PostResponse::fromEntity)
+            .collect(Collectors.toList());
     }
+
+
     @PostMapping("/makepost")
     public Post postAPost(@RequestBody Post post) {
-        //TODO: process POST request
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+
+        // получаем данные о пользователе для добавления его айдишника в поле автора
+        User author = userService.findUserById(userDetails.getId());
+        
+        // Устанавливаем автора для поста
+        post.setAuthor(author);
         return  postService.createPost(post);
     }
+
+
+
     @GetMapping("/{title}")
     public List<Post> getPostByTitle(@PathVariable String title) {
         return postService.getPostByTitle(title);

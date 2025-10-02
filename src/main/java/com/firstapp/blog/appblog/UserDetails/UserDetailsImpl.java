@@ -1,6 +1,7 @@
 package com.firstapp.blog.appblog.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +19,7 @@ public class UserDetailsImpl implements UserDetails{
     private Long id;
     private String username;
     private String password;
-    private Set<Post> posts;
+    //private Set<Post> posts;
 
     public static UserDetailsImpl build(User user){
         Set<Post> posts = user.getPosts();
@@ -26,14 +27,12 @@ public class UserDetailsImpl implements UserDetails{
         return new UserDetailsImpl(
             user.getId(),
             user.getUsername(),
-            user.getPassword(),
-            posts);
+            user.getPassword());
 
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return Collections.emptyList();//Эта huinya вернет пустой список т.к роли у меня пока не реализованы
     }
 }

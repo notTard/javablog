@@ -3,13 +3,18 @@ package com.firstapp.blog.appblog.jwt;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.firstapp.blog.appblog.UserDetails.UserDetailsImpl;
+import com.firstapp.blog.appblog.model.Post;
+
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.security.core.Authentication;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
@@ -29,9 +34,11 @@ public class JwtCore {
         this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String username){
+    public String generateToken(Authentication authentication){
+        UserDetailsImpl  userDetails = (UserDetailsImpl)authentication.getPrincipal();//Для ролей в будущем (Я ОТВЕЧАЮ)
+
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + jwtExpiration))
                 .signWith(key,SignatureAlgorithm.HS256)

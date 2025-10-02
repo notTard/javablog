@@ -4,15 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.firstapp.blog.appblog.model.Post;
 import com.firstapp.blog.appblog.repos.PostRepository;
 
 @Service
+@Transactional
 public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Transactional(readOnly = true)
     public List<Post> findAllPosts(){
         return postRepository.findAll();
     }

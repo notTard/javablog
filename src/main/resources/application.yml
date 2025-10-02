@@ -3,16 +3,12 @@ spring:
         name: appblog
     jpa:
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: update
         show-sql: true
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
                 format_sql: true
-    security:
-        jwt:
-            secret: "your-super-secret-key-that-should-be-long-and-complex"
-            expiration: 3600000
     
     datasource:
         url: jdbc:mysql://localhost:3306/blogDb
@@ -25,3 +21,6 @@ spring:
             org.hibernate.SQL: DEBUG
             org.hibernate.type.descriptor.sql.BasicBinder: TRACE
             com.example.demo: DEBUG
+jwt:
+    secret: "your-super-secret-key-that-should-be-long-and-complex"
+    expiration: 3600000
