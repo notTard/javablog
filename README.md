@@ -7,4 +7,4 @@
 
 # User Registration
 
-<img src ="https://github.com/notTard/javablog/blob/main/proof/Screenshot_41.png" width="50%" height="50%" alt="Скрин регистрации">
+<img src ="https://github.com/notTard/javablog/blob/main/proof/Screenshot_41.png" width="70%" height="50%" alt="Скрин регистрации">
