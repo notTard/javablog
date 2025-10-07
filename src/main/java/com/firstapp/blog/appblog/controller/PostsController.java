@@ -3,6 +3,7 @@ package com.firstapp.blog.appblog.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.firstapp.blog.appblog.UserDetails.UserDetailsImpl;
+import com.firstapp.blog.appblog.controller.DTO.MyPostsDTO;
 import com.firstapp.blog.appblog.controller.DTO.PostResponse;
 import com.firstapp.blog.appblog.model.Post;
 import com.firstapp.blog.appblog.model.User;
@@ -55,7 +56,16 @@ public class PostsController {
         return  postService.createPost(post);
     }
 
-
+    @GetMapping("/myposts")
+    public List<MyPostsDTO> getCurrentUserPosts() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Long currentUserId = userDetails.getId();
+    
+    return postService.findPostsByUserId(currentUserId).stream()
+            .map(MyPostsDTO::fromEntity)
+            .collect(Collectors.toList());
+}
 
     @GetMapping("/{title}")
     public List<Post> getPostByTitle(@PathVariable String title) {

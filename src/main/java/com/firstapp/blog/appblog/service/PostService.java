@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.firstapp.blog.appblog.model.Post;
+import com.firstapp.blog.appblog.model.User;
 import com.firstapp.blog.appblog.repos.PostRepository;
 
 @Service
@@ -40,5 +41,14 @@ public class PostService {
         post.setContent(postDetails.getContent());
         
         return postRepository.save(post);
+    }
+
+    public List<Post> findPostsByUserId(Long userId) {
+        // Сначала создаем объект User с нужным ID
+        User author = new User();
+        author.setId(userId);
+        
+        // Затем ищем посты этого автора
+        return postRepository.findByAuthor(author);
     }
 }
