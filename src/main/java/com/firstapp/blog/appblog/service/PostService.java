@@ -42,6 +42,14 @@ public class PostService {
         
         return postRepository.save(post);
     }
+    public void deleteByAuthor(Long postId, Long authorId){
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+
+        if (!post.getAuthor().getId().equals(authorId)) {
+            throw new RuntimeException("You are not allowed to delete this post");
+        }
+        postRepository.delete(post);
+    }
 
     public List<Post> findPostsByUserId(Long userId) {
         // Сначала создаем объект User с нужным ID
