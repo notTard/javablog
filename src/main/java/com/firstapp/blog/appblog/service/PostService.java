@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.firstapp.blog.appblog.model.Post;
+import com.firstapp.blog.appblog.model.User;
 import com.firstapp.blog.appblog.repos.PostRepository;
 
 @Service
@@ -40,5 +41,22 @@ public class PostService {
         post.setContent(postDetails.getContent());
         
         return postRepository.save(post);
+    }
+    public void deleteByAuthor(Long postId, Long authorId){
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+
+        if (!post.getAuthor().getId().equals(authorId)) {
+            throw new RuntimeException("You are not allowed to delete this post");
+        }
+        postRepository.delete(post);
+    }
+
+    public List<Post> findPostsByUserId(Long userId) {
+        // Сначала создаем объект User с нужным ID
+        User author = new User();
+        author.setId(userId);
+        
+        // Затем ищем посты этого автора
+        return postRepository.findByAuthor(author);
     }
 }
